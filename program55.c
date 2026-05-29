@@ -1,24 +1,22 @@
-// Input : 5
-// Output : 0   1   2   3   4 
+//input : 5
+//output : 1 2 3 4 
 
-#include<stdio.h>
+#include <stdio.h>
 
 void Display(int iNo)
-{
+{   
     int iCnt = 0;
-    
-    for(iCnt = 0 ; iCnt < iNo ; iCnt++)
-    {
+    for(iCnt = 1;iCnt<iNo;iCnt = iCnt + 1){
         printf("%d\t",iCnt);
     }
     printf("\n");
-
 }
+
 int main()
 {
     int iValue = 0;
-    printf("Enter the Number : \n");
-    scanf("%d ",&iValue);
+    printf("Enter the number : \n");
+    scanf("%d",&iValue);
 
     Display(iValue);
 
