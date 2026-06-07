@@ -1,21 +1,25 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-int Summation(int Arr[],int iSize)
+// time complexity is O(N)
+int Minimum(int Arr[],int iSize)
 {
     int iCnt = 0;
-    int iSum = 0;
+    int iMin = 0;
+    iMin = Arr[0];
 
     for(iCnt = 0; iCnt < iSize; iCnt++)
     {
-        iSum = iSum + Arr[iCnt];
+        if(Arr[iCnt] < iMin)
+        {
+            iMin = Arr[iCnt];
+        }
     }
-    return iSum;
+    return iMin;
 }
 int main()
 {
     int *Brr = NULL;
-    int iLength = 0, iCnt = 0, iRet = 0;
+    int iLength = 0, iCnt = 0,iRet = 0;
 
     printf("Enter the number of elements : \n");
     scanf("%d",&iLength);
@@ -28,8 +32,11 @@ int main()
     {
         scanf("%d",&Brr[iCnt]);
     }
-    iRet = Summation(Brr,iLength);
-    printf("Summation is : %d\n",iRet);
+
+    iRet = Minimum(Brr,iLength);
+
+    printf("Minimum number is : %d\n",iRet);
     free(Brr);
+
     return 0;
 }

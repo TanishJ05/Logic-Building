@@ -1,14 +1,17 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int Summation(int Arr[],int iSize)
+int SumEven(int Arr[],int iSize)
 {
     int iCnt = 0;
     int iSum = 0;
 
     for(iCnt = 0; iCnt < iSize; iCnt++)
     {
-        iSum = iSum + Arr[iCnt];
+        if(Arr[iCnt] % 2 == 0)
+        {
+            iSum = iSum + Arr[iCnt];
+        }
     }
     return iSum;
 }
@@ -28,8 +31,8 @@ int main()
     {
         scanf("%d",&Brr[iCnt]);
     }
-    iRet = Summation(Brr,iLength);
-    printf("Summation is : %d\n",iRet);
+    iRet = SumEven(Brr,iLength);
+    printf("Sum of Even elements are : %d\n",iRet);
     free(Brr);
     return 0;
 }

@@ -1,16 +1,19 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int Summation(int Arr[],int iSize)
+int CountEven(int Arr[],int iSize)
 {
     int iCnt = 0;
-    int iSum = 0;
+    int iCount = 0;
 
     for(iCnt = 0; iCnt < iSize; iCnt++)
     {
-        iSum = iSum + Arr[iCnt];
+        if(Arr[iCnt] % 2 == 0)
+        {
+            iCount++;
+        }
     }
-    return iSum;
+    return iCount;
 }
 int main()
 {
@@ -28,8 +31,8 @@ int main()
     {
         scanf("%d",&Brr[iCnt]);
     }
-    iRet = Summation(Brr,iLength);
-    printf("Summation is : %d\n",iRet);
+    iRet = CountEven(Brr,iLength);
+    printf("Even elements are : %d\n",iRet);
     free(Brr);
     return 0;
 }
