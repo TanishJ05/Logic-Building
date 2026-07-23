@@ -1,3 +1,5 @@
+// SinglyLL in Java
+
 class node 
 {
     public int data;
@@ -72,7 +74,6 @@ public void InsertLast(int iNo)
 }
 public void InsertAtPos(int iNo,int iPos)
 {
-    node newn = new node(iNo);
     node temp = null;
     int i = 0;
 
@@ -91,7 +92,7 @@ public void InsertAtPos(int iNo,int iPos)
     }
     else 
     {
-        newn = new node(iNo);
+        node newn = new node(iNo);
         temp = first;
         for(i=1;i<iPos-1;i++)
         {
@@ -220,7 +221,7 @@ class program457
 
 /*
 ------------------------------------------------------------------------------------------------------------
-                SinglyLL        SinglyLL        DoublyLL        DoublyCL        Stack       Queue
+                SinglyLL        SinglyCL        DoublyLL        DoublyCL        Stack       Queue
 ------------------------------------------------------------------------------------------------------------
 C               done            done            done            done            --          --
 C++             done            done            done            done            --          --
