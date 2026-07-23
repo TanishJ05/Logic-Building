@@ -1,0 +1,31 @@
+/*
+input = 4
+output = 4*3*2*1=10
+*/
+
+#include <stdio.h>
+
+int Factorial(int iNo)
+{
+    int iMult = 1;
+    
+    while(iNo != 0)
+    {
+        iMult = iMult * iNo;
+        iNo--;
+    }
+    return iMult;
+}
+
+int main()
+{
+    int iValue = 0,iRet = 0;
+
+    printf("enter the frequency : \n");
+    scanf("%d",&iValue);
+    iRet = Factorial(iValue);
+
+    printf("Facorial is : %d\n",iRet);
+    
+    return 0;
+}

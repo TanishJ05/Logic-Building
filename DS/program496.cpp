@@ -1,70 +1,71 @@
+// SinglyLL in Cpp Generic 
+
 #include<iostream>
 using namespace std;
 
 #pragma pack(1)
 
+template<class T>
 struct node 
 {
-    int data;
+    T data;
     struct node *next;
-    struct node *prev;
 };
 
-typedef struct node NODE;
-typedef struct node *PNODE;
-
-#pragma pack(1)
-class DoublyLL
+template<class T>
+class SinglyLL
 {
     private:
-        PNODE first;
+        struct node<T> *first;
         int iCount;
-    public:
-        DoublyLL();
 
+    public:
+        SinglyLL();
         void Display();
         int Count();
-
-        void InsertFirst(int iNo);
-        void InsertLast(int iNo);
-        void InsertAtPos(int iNo,int iPos);
-        
+        void InsertFirst(T iNo);
+        void InsertLast(T iNo);
+        void InsertAtPos(T iNo,int iPos);
         void DeleteFirst();
         void DeleteLast();
         void DeleteAtPos(int iPos);
 };
 
-DoublyLL::DoublyLL()
+template<class T>
+SinglyLL<T>::SinglyLL()
 {
+    cout<<"Inside constructor"<<endl;
     this->first = NULL;
     this->iCount = 0;
 }
 
-void DoublyLL::Display()
+template<class T>
+void SinglyLL<T>::Display()
 {
-    PNODE temp = NULL;
-    cout<<"null | <=>";
+    struct node<T> *temp = NULL;
     temp = this->first;
 
     while(temp != NULL)
     {
-        cout<<"| "<<temp->data<<" | <=> ";
+        cout<<"| "<<temp->data<<" | -> ";
         temp = temp->next; 
     }
     cout<<"NULL"<<endl;
+}
 
-}
-int DoublyLL::Count()
+template<class T>
+int SinglyLL<T>::Count()
 {
-    return iCount;
+    return this->iCount;
 }
-void DoublyLL::InsertFirst(int iNo)
+
+template<class T>
+void SinglyLL<T>::InsertFirst(T iNo)
 {
-    PNODE newn = NULL;
-    newn = new NODE;
+    struct node<T> *newn = NULL;
+    newn = new struct node<T>;
     newn->data = iNo;
     newn->next = NULL;
-    newn->prev = NULL;
 
     if(NULL == this->first)
     {
@@ -73,19 +74,20 @@ void DoublyLL::InsertFirst(int iNo)
     else
     {
         newn->next = this->first;
-        this->first->prev = newn;
         this->first = newn;
     }
     this->iCount++;
+
 }
-void DoublyLL::InsertLast(int iNo)
+
+template<class T>
+void SinglyLL<T>::InsertLast(T iNo)
 {
-    PNODE newn = NULL;
-    PNODE temp = NULL;
-    newn = new NODE;
+    struct node<T> *newn = NULL;
+    struct node<T> *temp = NULL;
+    newn = new struct node<T>;
     newn->data = iNo;
     newn->next = NULL;
-    newn->prev = NULL;
 
     if(NULL == this->first)
     {
@@ -99,15 +101,16 @@ void DoublyLL::InsertLast(int iNo)
             temp = temp->next;
         }
         temp->next = newn;
-        newn->prev = temp;
     }
-    this->iCount++;
+    this->iCount++;         // important
 }
-void DoublyLL::InsertAtPos(int iNo,int iPos)
+
+template<class T>
+void SinglyLL<T>::InsertAtPos(T iNo,int iPos)
 {
     int i = 0;
-    PNODE temp = NULL;
-    PNODE newn = NULL;
+    struct node<T> *temp = NULL;
+    struct node<T> *newn = NULL;
 
     if((iPos < 1) || (iPos > iCount+1))
     {
@@ -124,10 +127,9 @@ void DoublyLL::InsertAtPos(int iNo,int iPos)
     }
     else
     {
-        newn = new NODE;
+        newn = new struct node<T>;
         newn->data = iNo;
         newn->next = NULL;
-        newn->prev = NULL;
 
         temp = this->first;
         
@@ -136,16 +138,16 @@ void DoublyLL::InsertAtPos(int iNo,int iPos)
             temp = temp->next;
         }
         newn->next = temp->next;
-        newn->prev = temp;
-        temp->next->prev = newn;
         temp->next = newn;
 
         this->iCount++;
     }
 }
-void DoublyLL::DeleteFirst()
+
+template<class T>
+void SinglyLL<T>::DeleteFirst()
 {
-    PNODE temp = NULL;
+    struct node<T> *temp = NULL;
 
     if(this->first == NULL)
     {
@@ -160,14 +162,15 @@ void DoublyLL::DeleteFirst()
     {
         temp = this->first;
         this->first = this->first->next;
-        this->first->prev = NULL;
         delete temp;
     }
     this->iCount--;
 }
-void DoublyLL::DeleteLast()
+
+template<class T>
+void SinglyLL<T>::DeleteLast()
 {
-    PNODE temp = NULL;
+    struct node<T> *temp = NULL;
 
     if(this->first == NULL)
     {
@@ -193,11 +196,12 @@ void DoublyLL::DeleteLast()
     this->iCount--;
 }
 
-void DoublyLL::DeleteAtPos(int iPos)
+template<class T>
+void SinglyLL<T>::DeleteAtPos(int iPos)
 {
-    int i = 0;
-    PNODE temp = NULL;
-    PNODE target = NULL;
+    T i = 0;
+    struct node<T> *temp = NULL;
+    struct node<T> *target = NULL;
 
     if((iPos < 1) || (iPos > iCount))
     {
@@ -222,7 +226,6 @@ void DoublyLL::DeleteAtPos(int iPos)
         }
         target = temp->next;
         temp->next = target->next;
-        target->next->prev = temp;
         delete target;
 
         this->iCount--;
@@ -231,9 +234,9 @@ void DoublyLL::DeleteAtPos(int iPos)
 
 int main()
 {
-    DoublyLL sobj;
     int iRet = 0;
-    sobj.InsertFirst(101);
+    SinglyLL<int> sobj;
+    
     sobj.InsertFirst(51);
     sobj.InsertFirst(21);
     sobj.InsertFirst(11);
@@ -241,41 +244,44 @@ int main()
     sobj.Display();
 
     iRet = sobj.Count();
-    cout<<"Number of nodes are :"<<iRet<<endl;
-
+    cout<<"Number of Elements are : "<<iRet<<endl;
+    
+    sobj.InsertLast(101);
     sobj.InsertLast(111);
     sobj.InsertLast(121);
 
     sobj.Display();
 
     iRet = sobj.Count();
-    cout<<"Number of nodes are :"<<iRet<<endl;
+    cout<<"Number of Elements are : "<<iRet<<endl;
 
     sobj.DeleteFirst();
 
     sobj.Display();
 
     iRet = sobj.Count();
-    cout<<"Number of nodes are :"<<iRet<<endl;
+    cout<<"Number of Elements are : "<<iRet<<endl;
 
     sobj.DeleteLast();
+
+    sobj.Display();
+
+    iRet = sobj.Count();
+    cout<<"Number of Elements are : "<<iRet<<endl;
+
+    sobj.InsertAtPos(105,4);
+
+    sobj.Display();
+
+    iRet = sobj.Count();
+    cout<<"Number of Elements are : "<<iRet<<endl;
     
+    sobj.DeleteAtPos(4);
+
     sobj.Display();
 
     iRet = sobj.Count();
-    cout<<"Number of nodes are :"<<iRet<<endl;
-
-    sobj.InsertAtPos(55,3);
-    sobj.Display();
-
-    iRet = sobj.Count();
-    cout<<"Number of nodes are :"<<iRet<<endl;
-
-    sobj.DeleteAtPos(3);
-    sobj.Display();
-
-    iRet = sobj.Count();
-    cout<<"Number of nodes are :"<<iRet<<endl;
+    cout<<"Number of Elements are : "<<iRet<<endl;
 
     return 0;
 }
